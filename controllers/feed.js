@@ -18,21 +18,27 @@ exports.getPosts = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
     const errors = validationResult(req);
+    console.log(errors.array());
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, entered data is incorrect.');
-        error.stausCode = 422;
+        error.statusCode = 422;
         throw error;
     }
+    if (!req.file) {
+        const error = new Error('No image provided.');
+        error.statusCode = 422;
+        throw error;
+    }
+    const imageUrl = req.file.path;
     const title = req.body.title;
     const content = req.body.content;
     const post = new Post({
         title: title,
         content: content,
-        imageUrl: 'images/yellow.jpg',
+        imageUrl: imageUrl,
         creator: {name: 'Ahmad'}
     });
-    post
-        .save()
+    post.save()
         .then(result => {
             res.status(201).json({
                 message: 'Post created successfully!',
@@ -40,8 +46,8 @@ exports.createPost = (req, res, next) => {
             });
         })
         .catch(err => {
-            if (!err.stausCode) {
-                err.stausCode = 500;
+            if (!err.statusCode) {
+                err.statusCode = 500;
             }
             next(err);
         });

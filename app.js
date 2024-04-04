@@ -1,13 +1,36 @@
 const path = require('path');
 const express = require('express');
 const mongoose = require("mongoose");
+const multer = require('multer');
+const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const feedRoutes = require('./routes/feed');
 
 const app = express();
 
-app.use(express.urlencoded()); // x-www-form-urlencoded <form>
-app.use(express.json()); // application/json
+const fileStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images');
+    }, filename: function (req, file, cb) {
+        // const random = new Date().toISOString().replace(/[:.-]/g, '_') + '-' + Math.round(Math.random() * 1E9);
+        const random = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        const fileName = file.fieldname + '-' + random + '-' + file.originalname;
+        cb(null, fileName);
+    },
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+app.use(bodyParser.urlencoded({extends: false})); // x-www-form-urlencoded <form>
+app.use(bodyParser.json()); // application/json
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((req, res, next) => {
