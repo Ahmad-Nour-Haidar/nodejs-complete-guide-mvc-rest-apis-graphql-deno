@@ -28,8 +28,10 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-app.use(bodyParser.urlencoded({extends: false})); // x-www-form-urlencoded <form>
-app.use(bodyParser.json()); // application/json
+// app.use(bodyParser.urlencoded({extends: false})); // x-www-form-urlencoded <form>
+// app.use(bodyParser.json()); // application/json
+app.use(express.urlencoded()); // x-www-form-urlencoded <form>
+app.use(express.json()); // application/json
 app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
