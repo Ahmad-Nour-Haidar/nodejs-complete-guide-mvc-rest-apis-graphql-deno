@@ -1,0 +1,37 @@
+# Dependencies
+/node_modules
+
+# Build files
+/build
+/dist
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# OS or editor temporary files
+.DS_Store
+Thumbs.db
+
+# Dependency directories
+/npm-debug.log*
+*.pnp
+.pnp.js
+
+# Optional: IDE/Editor specific files (uncomment as needed)
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Optional: System files
+# .DS_Store
+# Thumbs.db
+
+# Optional: Compiled binary addons (if any)
+# node_modules/**/*.node
+
+# Optional: Yarn Integrity file
+# .yarn-integrity
