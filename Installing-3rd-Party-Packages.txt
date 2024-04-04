@@ -6,3 +6,4 @@ npm uninstall <package_name> // remove package
 1. npm i --save-dev nodemon // Automatic re-running server.
 2. npm i --save express
 3. npm i --save express-validator
+4. npm i --save mongoose // work with NoSql

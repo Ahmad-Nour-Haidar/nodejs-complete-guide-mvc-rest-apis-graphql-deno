@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "express": "^4.19.2",
-    "express-validator": "^7.0.1"
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.3.0"
   },
   "name": "js-learn-api-with-maximilian",
   "version": "1.0.0",

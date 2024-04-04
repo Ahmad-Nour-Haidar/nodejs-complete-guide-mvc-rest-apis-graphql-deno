@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require("mongoose");
 
 const feedRoutes = require('./routes/feed');
 
@@ -17,6 +18,15 @@ app.use((req, res, next) => {
 app.use('/feed', feedRoutes);
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+const MONGODB_URI = 'mongodb://localhost/messages';
+mongoose
+    .connect(MONGODB_URI)
+    .then((result) => {
+        // console.log(result);
+        console.log('Connected to MongoDB...');
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`);
+        });
+    })
+    .catch((err) => console.log('Connected Failed to MongoDB', err));
+
