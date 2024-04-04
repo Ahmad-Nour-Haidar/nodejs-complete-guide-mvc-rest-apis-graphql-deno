@@ -13,11 +13,8 @@ exports.signupValidator = [
             });
         })
         .normalizeEmail(),
-    body('password')
-        .trim()
-        .isLength({min: 5}),
-    body('name')
-        .trim()
-        .not()
-        .isEmpty()
+
+    body('password').trim().isLength({min: 5}),
+
+    body('name').trim().notEmpty(),
 ];
