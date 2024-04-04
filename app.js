@@ -1,0 +1,12 @@
+const express = require('express');
+
+const feedRoutes = require('./routes/feed');
+
+const app = express();
+
+app.use('/feed', feedRoutes);
+
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});

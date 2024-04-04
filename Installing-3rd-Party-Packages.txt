@@ -1,0 +1,7 @@
+npm uninstall <package_name> // remove package
+
+# npm init
+# npm install
+
+1.  npm i --save-dev nodemon // Automatic re-running server.
+2.  npm i --save express
