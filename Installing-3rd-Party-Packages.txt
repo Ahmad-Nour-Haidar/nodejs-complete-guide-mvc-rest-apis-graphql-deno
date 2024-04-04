@@ -11,3 +11,4 @@ npm uninstall <package_name> // remove package
 6. npm i --save body-parser // Node.js body parsing middleware.
 7. npm i --save dotenv
 8. npm i --save bcryptjs // work with password
+9. npm i --save jsonwebtoken
