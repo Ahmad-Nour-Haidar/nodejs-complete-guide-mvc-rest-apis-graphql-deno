@@ -5,9 +5,10 @@ const feedController = require('../controllers/feed');
 const router = express.Router();
 
 const {createEditPostValidator} = require('../util/validators/post-validator');
+const isAuth = require('../middleware/is-auth');
 
 // GET /feed/posts
-router.get('/posts', feedController.getPosts);
+router.get('/posts', isAuth, feedController.getPosts);
 
 // POST /feed/post
 router.post('/post', createEditPostValidator, feedController.createPost);
