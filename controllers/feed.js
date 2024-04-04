@@ -3,8 +3,14 @@ exports.getPosts = (req, res, next) => {
         .json({
             posts: [
                 {
-                    title: "First Post",
-                    content: "This is the first post!",
+                    _id: '1',
+                    title: 'First Post',
+                    content: 'This is the first post!',
+                    imageUrl: 'images/yellow.jpg',
+                    creator: {
+                        name: 'Ahmad'
+                    },
+                    createdAt: new Date()
                 }
             ],
         });
