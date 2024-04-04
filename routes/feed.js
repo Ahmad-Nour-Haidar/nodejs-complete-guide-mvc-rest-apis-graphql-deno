@@ -12,4 +12,6 @@ router.get('/posts', feedController.getPosts);
 // POST /feed/post
 router.post('/post', createPostValidator, feedController.createPost);
 
+router.get('/post/:postId', feedController.getPost);
+
 module.exports = router;
