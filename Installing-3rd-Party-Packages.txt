@@ -3,12 +3,13 @@ npm uninstall <package_name> // remove package
 # npm init
 # npm install
 
-1. npm i --save-dev nodemon // Automatic re-running server.
-2. npm i --save express
-3. npm i --save express-validator
-4. npm i --save mongoose // work with NoSql
-5. npm i --save multer // Multer adds a body object and a file or files object to the request object.
-6. npm i --save body-parser // Node.js body parsing middleware.
-7. npm i --save dotenv
-8. npm i --save bcryptjs // work with password
-9. npm i --save jsonwebtoken
+1.  npm i --save-dev nodemon // Automatic re-running server.
+2.  npm i --save express
+3.  npm i --save express-validator
+4.  npm i --save mongoose // work with NoSql
+5.  npm i --save multer // Multer adds a body object and a file or files object to the request object.
+6.  npm i --save body-parser // Node.js body parsing middleware.
+7.  npm i --save dotenv
+8.  npm i --save bcryptjs // work with password
+9.  npm i --save jsonwebtoken
+10. npm i --save socket.io

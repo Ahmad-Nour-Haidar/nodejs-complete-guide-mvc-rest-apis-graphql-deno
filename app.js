@@ -62,8 +62,13 @@ mongoose
     .then((result) => {
         // console.log(result);
         console.log('Connected to MongoDB...');
-        app.listen(port, () => {
+        const server = app.listen(port, () => {
             console.log(`Server running on port ${port}`);
+        });
+        const Server = require('socket.io').Server;
+        const io = new Server(server);
+        io.on('connection', socket => {
+            console.log('client connected');
         });
     })
     .catch((err) => console.log('Connected Failed to MongoDB', err));
