@@ -65,8 +65,7 @@ mongoose
         const server = app.listen(port, "0.0.0.0", () => {
             console.log(`Server running on port ${port}`);
         });
-        const Server = require('socket.io').Server;
-        const io = new Server(server);
+        const io = require('./socket').init(server);
         io.on('connection', socket => {
             console.log('client connected');
         });
