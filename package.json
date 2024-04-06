@@ -10,7 +10,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.0",
     "multer": "^1.4.5-lts.1",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "validator": "^13.11.0"
   },
   "name": "js-learn-api-with-maximilian",
   "version": "1.0.0",
