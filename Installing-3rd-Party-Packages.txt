@@ -13,3 +13,5 @@ npm uninstall <package_name> // remove package
 8.  npm i --save bcryptjs // work with password
 9.  npm i --save jsonwebtoken
 10. npm i --save socket.io
+11. npm i --save graphql
+12. npm i --save express-graphql

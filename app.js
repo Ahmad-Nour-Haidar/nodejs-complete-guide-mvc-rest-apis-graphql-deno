@@ -2,11 +2,11 @@ const path = require('path');
 const express = require('express');
 const mongoose = require("mongoose");
 const multer = require('multer');
-const bodyParser = require('body-parser');
 require('dotenv').config();
+const graphqlHttp = require('express-graphql');
 
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
 
 const app = express();
 
@@ -42,9 +42,18 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+app.use('/graphql',
+    graphqlHttp.graphqlHTTP({
+        schema: graphqlSchema,
+        rootValue: graphqlResolver,
+    })
+);
 
-app.use('/feed', feedRoutes);
-app.use('/auth', authRoutes);
+/**
+ {
+    "query": "{ hello { text views } }"
+  }
+ * */
 
 app.use((error, req, res, next) => {
     console.log(error);
@@ -62,12 +71,8 @@ mongoose
     .then((result) => {
         // console.log(result);
         console.log('Connected to MongoDB...');
-        const server = app.listen(port, "0.0.0.0", () => {
+        app.listen(port, "0.0.0.0", () => {
             console.log(`Server running on port ${port}`);
-        });
-        const io = require('./socket').init(server);
-        io.on('connection', socket => {
-            console.log('client connected');
         });
     })
     .catch((err) => console.log('Connected Failed to MongoDB', err));
