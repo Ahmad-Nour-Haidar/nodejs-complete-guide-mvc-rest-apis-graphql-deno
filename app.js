@@ -50,7 +50,7 @@ app.use('/graphql',
         schema: graphqlSchema,
         rootValue: graphqlResolver,
         graphiql: true,
-        formatError(error) {
+        customFormatErrorFn(error) {
             if (!error.originalError) {
                 return error;
             }
