@@ -62,7 +62,7 @@ mongoose
     .then((result) => {
         // console.log(result);
         console.log('Connected to MongoDB...');
-        const server = app.listen(port, () => {
+        const server = app.listen(port, "0.0.0.0", () => {
             console.log(`Server running on port ${port}`);
         });
         const Server = require('socket.io').Server;
@@ -72,4 +72,7 @@ mongoose
         });
     })
     .catch((err) => console.log('Connected Failed to MongoDB', err));
+
+// I connect Socket.IO with Flutter,
+// Flutter: github repo: https://github.com/Ahmad-Nour-Haidar/shorts-tutorial/blob/main/lib/main.dart
 
