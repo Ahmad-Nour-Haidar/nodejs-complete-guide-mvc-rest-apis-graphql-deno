@@ -73,5 +73,5 @@ mongoose
     .catch((err) => console.log('Connected Failed to MongoDB', err));
 
 // I connect Socket.IO with Flutter,
-// Flutter: github repo: https://github.com/Ahmad-Nour-Haidar/shorts-tutorial/blob/main/lib/main.dart
+// Flutter: github repo: https://github.com/Ahmad-Nour-Haidar/shorts-tutorial/blob/main/lib/core/socket_io/socket_io_connect.dart
 

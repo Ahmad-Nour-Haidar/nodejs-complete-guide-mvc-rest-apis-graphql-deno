@@ -4,6 +4,7 @@ const {validationResult} = require('express-validator');
 
 const Post = require('../models/post');
 const User = require('../models/user');
+const io = require('../socket');
 
 exports.getPosts = async (req, res, next) => {
     const currentPage = req.query.page || 1;
@@ -68,6 +69,10 @@ exports.createPost = async (req, res, next) => {
                     post: post,
                     // creator: user,
                 });
+            io.getIO().emit('posts', {
+                action: 'create',
+                post: post,
+            });
         }
     } catch (error) {
         if (!error.statusCode) {
