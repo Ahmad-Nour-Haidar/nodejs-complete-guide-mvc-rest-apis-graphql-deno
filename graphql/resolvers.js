@@ -110,7 +110,7 @@ module.exports = {
         };
     },
 
-    posts: async function ({page}, req) {
+    posts: async function (args, req) {
         if (!req.isAuth) {
             const error = new Error('Not authenticated!');
             error.code = 401;
