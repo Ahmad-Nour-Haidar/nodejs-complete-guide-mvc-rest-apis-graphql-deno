@@ -1,4 +1,6 @@
 const path = require('path');
+const fs = require('fs');
+
 const express = require('express');
 const mongoose = require("mongoose");
 const multer = require('multer');
@@ -49,26 +51,36 @@ app.use((req, res, next) => {
 
 app.use(auth);
 
-app.use('/graphql',
-    graphqlHttp.graphqlHTTP({
-        schema: graphqlSchema,
-        rootValue: graphqlResolver,
-        graphiql: true,
-        customFormatErrorFn(error) {
-            if (!error.originalError) {
-                return error;
-            }
-            const data = error.originalError.data;
-            const message = error.message || 'An error occurred.'
-            const code = error.originalError.code || 500;
-            return {
-                message: message,
-                status: code,
-                data: data,
-            };
+app.put('/post-image', (req, res, next) => {
+    if (!req.isAuth) {
+        throw new Error('Not authenticated!');
+    }
+    if (!req.file) {
+        return res.status(200).json({message: 'No file provided!'});
+    }
+    if (req.body.oldPath) {
+        clearImage(req.body.oldPath);
+    }
+    return res.status(201)
+        .json({
+            message: 'File stored.',
+            filePath: req.file.path,
+        });
+});
+
+app.use('/graphql', graphqlHttp.graphqlHTTP({
+    schema: graphqlSchema, rootValue: graphqlResolver, graphiql: true, customFormatErrorFn(error) {
+        if (!error.originalError) {
+            return error;
         }
-    })
-);
+        const data = error.originalError.data;
+        const message = error.message || 'An error occurred.'
+        const code = error.originalError.code || 500;
+        return {
+            message: message, status: code, data: data,
+        };
+    }
+}));
 
 app.use((error, req, res, next) => {
     console.log(error);
@@ -90,6 +102,11 @@ mongoose
         });
     })
     .catch((err) => console.log('Connected Failed to MongoDB', err));
+
+const clearImage = filePath => {
+    filePath = path.join(__dirname, '..', filePath);
+    fs.unlink(filePath, err => console.log(err));
+};
 
 // I connect Socket.IO with Flutter,
 // Flutter: github repo: https://github.com/Ahmad-Nour-Haidar/shorts-tutorial/blob/main/lib/core/socket_io/socket_io_connect.dart
